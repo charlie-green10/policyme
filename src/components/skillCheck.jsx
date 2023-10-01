@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 export const SkillCheck = ({
-    skills
+    skills,
+    getAttributeModifier
 }) => {
     const [ skill, setSkill ] = useState('Acrobatics');
     const [ DC, setDC ] = useState();
@@ -10,7 +11,8 @@ export const SkillCheck = ({
     const roll = () => {
         if(DC) {
             const rollAmount = Math.ceil(Math.random() * 20);
-            setResult({ roll: rollAmount, success:  rollAmount + skills[skill] >= DC })
+            const { amount: bonus } = getAttributeModifier(skill);
+            setResult({ roll: rollAmount, success:  rollAmount + skills[skill] + bonus >= DC })
         }
         
     }

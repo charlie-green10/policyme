@@ -20,6 +20,7 @@ export const  Character = ({
         <Container>
             <SkillCheck 
                 skills={character.skills}
+                getAttributeModifier={getAttributeModifier}
             />
             <div style={{display: 'flex'}}>
                 <Attributes 

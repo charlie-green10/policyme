@@ -15,10 +15,11 @@ export const Skills = ({
                 const { attribute, amount: bonus } = getAttributeModifier(skill);
                 return (
                     <div key={skill}>
-                        <span>{skill} (Modifier: {attribute})</span>
+                        <span>{skill} (Modifier: {attribute}) </span>
                         <button onClick={() => updateSkill(skill, '-')}>-</button>
                         <span>{amount + bonus}</span>
                         <button onClick={() => updateSkill(skill, '+')}>+</button>
+                        <span> (Points: {amount}, Modifer: {bonus})</span>
                     </div>
                 );
             })}
