@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import { CLASS_LIST, SKILL_LIST } from './consts.js';
 
-const CHARACTER_URL = 'https://recruiting.verylongdomaintotestwith.ca/api/{thats-charlie}/character';
-const ATTRIBUTE_MAX = 70;
+export const CHARACTER_URL = 'https://recruiting.verylongdomaintotestwith.ca/api/{thats-charlie}/character';
+export const ATTRIBUTE_MAX = 70;
 
 
 export const useCharacterBuilder = () => 
@@ -75,7 +75,7 @@ export const useCharacterBuilder = () =>
             let character = characters[uuid]
             if (character) {
                 const totalAttributes = Object.values(character.attributes).reduce((a, b) => { return a + b; }, 0);
-                if (totalAttributes < ATTRIBUTE_MAX) {
+                if (totalAttributes < ATTRIBUTE_MAX || direction === '-') {
                     character.attributes[attr] += direction === '+' ? 1 : -1;
                     setCharacters(current => {
                         return {
