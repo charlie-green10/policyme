@@ -1,21 +1,46 @@
-import { useState } from 'react';
 import './App.css';
-import { ATTRIBUTE_LIST, CLASS_LIST, SKILL_LIST } from './consts.js';
+import { useCharacterBuilder } from './useCharacterBuilder';
+import { Character } from './components/character';
 
 
 function App() {
-  const [num, setNum] = useState(0);
+  const {
+    characters,
+    newCharacter,
+    updateAttribute,
+    updateSkill,
+    getAttributeModifier,
+    characterMeetsClass,
+    getSkillPoints,
+    saveCharacters
+  } = useCharacterBuilder();
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Coding Exercise</h1>
       </header>
       <section className="App-section">
-        <div>
-          Value:
-          {num}
-          <button>+</button>
-          <button>-</button>
+        {Object.values(characters).map(character => {
+          return (
+            <Character 
+              key={character.uuid}
+              character={character}
+              updateAttribute={updateAttribute(character.uuid)}
+              updateSkill={updateSkill(character.uuid)}
+              getAttributeModifier={getAttributeModifier(character.uuid)}
+              characterMeetsClass={characterMeetsClass(character.uuid)}
+              getSkillPoints={getSkillPoints(character.uuid)}
+            />
+          )
+        })}
+        <div style={{ margin: '10px' }}>
+          <button onClick={newCharacter}>
+            Add Character
+          </button>
+          <button onClick={saveCharacters}>
+            Save Characters
+          </button>
         </div>
       </section>
     </div>
